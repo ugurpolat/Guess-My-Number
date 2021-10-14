@@ -64,15 +64,20 @@ const createRandomNumber = function (guessDigitsNumber) {
   while (i < guessDigitsNumber) {
     let randomIndex = Math.trunc(Math.random() * numbers.length);
     let value = numbers[randomIndex];
-    if (value !== 0) {
+    if (i === 0) {
+      if (value !== 0) {
+        guessNumber[i] = value;
+        numbers.splice(randomIndex, 1);
+        i++;
+      } else {
+        continue;
+      }
+    } else if (i >= 1) {
       guessNumber[i] = value;
       numbers.splice(randomIndex, 1);
       i++;
-    } else {
-      continue;
     }
   }
-
   return guessNumber;
 };
 
